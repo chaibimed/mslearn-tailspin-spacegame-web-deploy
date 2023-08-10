@@ -39,7 +39,9 @@ stages:
     - task: gulp@1
       displayName: 'Run glub tasks'
 
-    - script: 'echo "$(Build.Defintion), $(Build.BuildId), $(BuildNumber)" > buildinfo.txt'
+    - script: |
+       'echo "$(Build.Definition), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
+       'echo "$(Build.Definition), $(Build.BuildId), $(Build.BuildNumber)"
       displayName: 'Write build info'
       workingDirectory: $(wwwrootDir)
 
