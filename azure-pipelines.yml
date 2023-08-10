@@ -22,6 +22,9 @@ stages:
       wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
       dotnetSdkVersion: '6.x'
     steps:
+    - script: echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt
+      displayName: 'Write build info'
+      workingDirectory: $(wwwrootDir)
     - task: UseDotNet@2
       displayName: 'use .NET SDk $(dotnetSdkVersion)'
       inputs:
@@ -39,8 +42,7 @@ stages:
     - task: gulp@1
       displayName: 'Run glub tasks'
 
-    - bash: |
-       'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
+    - script: echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt
       displayName: 'Write build info'
       workingDirectory: $(wwwrootDir)
 
