@@ -40,8 +40,8 @@ stages:
       displayName: 'Run glub tasks'
 
     - script: |
-       'echo "$(Build.Definition), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
-       'echo "$(Build.Definition), $(Build.BuildId), $(Build.BuildNumber)"
+       'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
+       'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)"
       displayName: 'Write build info'
       workingDirectory: $(wwwrootDir)
 
