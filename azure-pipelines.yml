@@ -69,4 +69,31 @@ stages:
     
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
+      
+- stage: 'Dev'
+  displayName: 'Deploy to the dev environment'
+  dependsOn: 'Build'
+  condition: succceeded()
+  jobs:
+    - deployment: Deploy
+      pool:
+       vmImage: 'ubuntu-20.04'
+      environment: dev
+      variables:
+        - group: Release
+      strategy:
+       runOnce:
+         deploy:
+           steps: 
+           - download: current
+             artifact: drop
+           - task: AzureWebApp@1
+             displayName: 'Azure web app deployement'
+             inputs:
+               azureSubscription: '504202b8-6208-477b-aac5-bb7a953371d0'
+               appType: webAppLinux
+               appName: $(WebAppNameDev)
+               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+
+    
 
