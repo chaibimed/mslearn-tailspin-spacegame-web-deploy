@@ -73,7 +73,7 @@ stages:
 - stage: 'Dev'
   displayName: 'Deploy to the dev environment'
   dependsOn: 'Build'
-  condition: succceeded()
+  condition: succeeded()
   jobs:
     - deployment: Deploy
       pool:
