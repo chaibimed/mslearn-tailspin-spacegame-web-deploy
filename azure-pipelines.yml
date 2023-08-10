@@ -34,7 +34,7 @@ stages:
     - bash: ls -l ./node_modules
       displayName: 'List folder content'
     
-    - script: './node_modules/.bin/node-sass $(wwwrootDir)/**/*.scss --output $(wwwrootDir)'
+    - script: './node_modules/.bin/node-sass $(wwwrootDir)/css/site.scss --output $(wwwrootDir)'
       displayName: 'Compile Sass assets'
     - task: gulp@1
       displayName: 'Run glub tasks'
