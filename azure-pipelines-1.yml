@@ -78,7 +78,7 @@ stages:
          - task: AzureWebApp@1
            displayName: 'Deploy to azure web app'
            inputs:
-             azureSubscription: '$(subscriptionId)'
+             azureSubscription: 'space-game-sp'
              appType: 'webAppLinux'
              appName: '$(webAppName)'
              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
