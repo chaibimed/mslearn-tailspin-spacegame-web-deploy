@@ -78,6 +78,6 @@ stages:
          - task: AzureWebApp@1
            displayName: 'Deploy to azure web app'
            inputs:
-             azureSubscription: ''
+             azureSubscription: '$(subscriptionId)'
              appType: 'webAppLinux'
              appName: '$(webAppName)'
