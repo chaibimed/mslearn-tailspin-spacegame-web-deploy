@@ -82,3 +82,25 @@ stages:
              appType: 'webAppLinux'
              appName: '$(webAppName)'
              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+- stage: Staging
+  variables:
+   enabled: false
+  condition: eq('variables.enabled', true)
+  displayName: Deploy on Staging 
+  jobs:
+  - deployment: Deploy
+    pool: 'ubuntu-20.04'
+    dependsOn: 'Build'
+    strategy:
+     runOnce:
+      deploy:
+        steps:
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
+            displayName: 'Deploy on staging '
+            inputs:
+              azureSubscription: 'space-game-sp'
+              appType: 'webAppLinux'
+              appName: '$(webAppName)'
+              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
